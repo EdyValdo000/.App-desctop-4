@@ -4,6 +4,16 @@
              xmlns:local="clr-namespace:App_desctop_4"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <ControlTemplate x:Key="RoundedButtonTemplate" TargetType="Button">
+            <Border CornerRadius="25"
+                Background="{TemplateBinding Background}">
+                <ContentPresenter HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Margin="10"
+                              Content="{TemplateBinding Content}" />
+            </Border>
+        </ControlTemplate>
+
     </Application.Resources>
 </Application>

@@ -1,128 +1,151 @@
 ﻿<Window x:Class="App_desctop_4.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
         Title="Controle Inteligente de Lâmpadas"
         Width="600"
-        Height="800"
-        Background="#1B2A41">
+        Height="450"
+        Background="#D0D9E6">
 
-    <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <!-- Adicionando o ScrollViewer -->
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Título -->
+                <RowDefinition Height="Auto"/>
+                <!-- Entrada de IP e Porta -->
+                <RowDefinition Height="Auto"/>
+                <!-- Botões de Conexão -->
+                <RowDefinition Height="*"/>
+                <!-- Controle de Lâmpadas -->
+                <RowDefinition Height="Auto"/>
+                <!-- Estados das Lâmpadas -->
+            </Grid.RowDefinitions>
 
-        <!-- Título da aplicação -->
-        <TextBlock Text="Controle Inteligente de Lâmpadas"
-                   FontSize="28"
-                   FontWeight="Bold"
-                   Foreground="#8E44AD"
-                   HorizontalAlignment="Center"
-                   Margin="0,20"/>
+            <!-- Título -->
+            <TextBlock Text="Controle Inteligente de Lâmpadas"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="#1B2A41"
+                       HorizontalAlignment="Center"
+                       Margin="0,20" />
 
-        <!-- Área de entrada de IP e Porta -->
-        <StackPanel Grid.Row="1" VerticalAlignment="Top" Margin="0,20">
-            <TextBox x:Name="IpEntry"
-                     Background="#BDC3C7"
-                     Foreground="#2C3E50"
-                     FontSize="16"
-                     Height="40"
-                     Padding="10"
-                     Margin="0,10"
-                     BorderThickness="1"
-                     BorderBrush="#2C3E50" />
+            <!-- Entradas de IP e Porta -->
+            <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20" Width="300">
+                <TextBox x:Name="IpEntry"
+         Text="IP do servidor"
+         Background="#1B2A41"
+         Foreground="#E0E0E0"
+         FontSize="16"
+         Height="50"
+         Padding="10"
+         Margin="0,10"
+         BorderThickness="0"
+         HorizontalAlignment="Stretch"
+         GotFocus="OnGotFocus"
+         LostFocus="OnLostFocus"/>
 
-            <TextBox x:Name="PortEntry"
-                     Background="#BDC3C7"
-                     Foreground="#2C3E50"
-                     FontSize="16"
-                     Height="40"
-                     Padding="10"
-                     Margin="0,10"
-                     BorderThickness="1"
-                     BorderBrush="#2C3E50" />
-        </StackPanel>
+                <TextBox x:Name="PortEntry"
+         Text="Porta do servidor"
+         Background="#1B2A41"
+         Foreground="#E0E0E0"
+         FontSize="16"
+         Height="50"
+         Padding="10"
+         Margin="0,10"
+         BorderThickness="0"
+         HorizontalAlignment="Stretch"
+         GotFocus="OnGotFocus"
+         LostFocus="OnLostFocus" />
 
-        <!-- Botões de Conexão -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30" >
-            <Button Content="Conectar"
-                    Background="#27AE60"
-                    Foreground="White"
-                    FontSize="16"
-                    Width="120"
-                    Height="40"
-                    Padding="10"
-                    Margin="10"
-                    Click="OnConnectClicked"/>
+            </StackPanel>
 
-            <Button Content="Desconectar"
-                    Background="#E74C3C"
-                    Foreground="White"
-                    FontSize="16"
-                    Width="120"
-                    Height="40"
-                    Padding="10"
-                    Margin="10"
-                    Click="OnDisconnectClicked"/>
-        </StackPanel>
+            <!-- Botões de Conexão -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30">
+                <Button Content="Conectar"
+                Background="#27AE60"
+                Foreground="White"
+                FontSize="16"
+                Width="120"
+                Height="50"
+                Template="{StaticResource RoundedButtonTemplate}"
+                Margin="10,0"
+                Click="OnConnectClicked" />
 
-        <!-- Controle de Lâmpadas com botões arredondados -->
-        <UniformGrid Grid.Row="3" Rows="2" Columns="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40">
-            <Border CornerRadius="15" BorderBrush="#2980B9" BorderThickness="2" Margin="5">
+                <Button Content="Desconectar"
+                Background="#E74C3C"
+                Foreground="White"
+                FontSize="16"
+                Width="120"
+                Height="50"
+                Template="{StaticResource RoundedButtonTemplate}"
+                Margin="10,0"
+                Click="OnDisconnectClicked" />
+            </StackPanel>
+
+            <!-- Controle de Lâmpadas -->
+            <UniformGrid Grid.Row="3" Rows="2" Columns="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20" Width="400" Height="200">
                 <Button Content="Lâmpada 1"
                         Background="#2980B9"
                         Foreground="White"
                         FontSize="16"
-                        Padding="10"
+                        Template="{StaticResource RoundedButtonTemplate}"
                         Click="OnLampControlClicked"
-                        CommandParameter="1" />
-            </Border>
+                        CommandParameter="1"
+                        Margin="5" 
+                        Width="100"
+                        Height="50"/>
 
-            <Border CornerRadius="15" BorderBrush="#2980B9" BorderThickness="2" Margin="5">
                 <Button Content="Lâmpada 2"
                         Background="#2980B9"
                         Foreground="White"
                         FontSize="16"
-                        Padding="10"
+                        Template="{StaticResource RoundedButtonTemplate}"
                         Click="OnLampControlClicked"
-                        CommandParameter="2" />
-            </Border>
+                        CommandParameter="2"
+                        Margin="5" 
+                        Width="100"
+                        Height="50"/>
 
-            <Border CornerRadius="15" BorderBrush="#2980B9" BorderThickness="2" Margin="5">
                 <Button Content="Lâmpada 3"
                         Background="#2980B9"
                         Foreground="White"
                         FontSize="16"
-                        Padding="10"
+                        Template="{StaticResource RoundedButtonTemplate}"
                         Click="OnLampControlClicked"
-                        CommandParameter="3" />
-            </Border>
+                        CommandParameter="3"
+                        Margin="5" 
+                        Width="100"
+                        Height="50"/>
 
-            <Border CornerRadius="15" BorderBrush="#2980B9" BorderThickness="2" Margin="5">
                 <Button Content="Lâmpada 4"
                         Background="#2980B9"
                         Foreground="White"
                         FontSize="16"
-                        Padding="10"
+                        Template="{StaticResource RoundedButtonTemplate}"
                         Click="OnLampControlClicked"
-                        CommandParameter="4" />
-            </Border>
-        </UniformGrid>
+                        CommandParameter="4"
+                        Margin="5" 
+                        Width="100"
+                        Height="50"/>
+            </UniformGrid>
 
-        <!-- Tabela de estados das lâmpadas -->
-        <StackPanel Grid.Row="4" VerticalAlignment="Top" Margin="0,40,0,0">
-            <TextBlock Text="Estado das Lâmpadas" FontWeight="Bold" Foreground="White" FontSize="18" />
-            <ListView Name="LampStateList">
-                <ListViewItem Content="Lâmpada 1: Desconectada" x:Name="Lamp1Status"/>
-                <ListViewItem Content="Lâmpada 2: Desconectada" x:Name="Lamp2Status"/>
-                <ListViewItem Content="Lâmpada 3: Desconectada" x:Name="Lamp3Status"/>
-                <ListViewItem Content="Lâmpada 4: Desconectada" x:Name="Lamp4Status"/>
-            </ListView>
-        </StackPanel>
+            <!-- Tabela de estados das lâmpadas -->
+            <StackPanel Grid.Row="4" VerticalAlignment="Top" Margin="0,20" HorizontalAlignment="Center">
+                <TextBlock Text="Estado das Lâmpadas"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Foreground="#1B2A41"
+                           Margin="0,10"
+                           HorizontalAlignment="Center" />
 
-    </Grid>
+                <ListView Width="400" Background="White" BorderBrush="#1B2A41" BorderThickness="1">
+                    <ListViewItem Content="Lâmpada 1: Desconectada" x:Name="Lamp1Status" />
+                    <ListViewItem Content="Lâmpada 2: Desconectada" x:Name="Lamp2Status" />
+                    <ListViewItem Content="Lâmpada 3: Desconectada" x:Name="Lamp3Status" />
+                    <ListViewItem Content="Lâmpada 4: Desconectada" x:Name="Lamp4Status" />
+                </ListView>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Window>

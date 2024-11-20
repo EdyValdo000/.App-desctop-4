@@ -20,5 +20,43 @@ namespace App_desctop_4
         {
             InitializeComponent();
         }
+        private void OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox != null && (textBox.Text == "IP do servidor" || textBox.Text == "Porta do servidor"))
+            {
+                textBox.Text = "";
+                textBox.Foreground = Brushes.White;
+            }
+        }
+
+        private void OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox != null && string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                if (textBox.Name == "IpEntry")
+                    textBox.Text = "IP do servidor";
+                else if (textBox.Name == "PortEntry")
+                    textBox.Text = "Porta do servidor";
+
+                textBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void OnConnectClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnDisconnectClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnLampControlClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
